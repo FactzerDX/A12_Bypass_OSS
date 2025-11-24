@@ -10,9 +10,13 @@
 	•	เฟสที่ 1 — itunesstored: ส่งไฟล์ BLDatabaseManager.sqlite ที่ถูกแก้ไขเข้าไปยังโฟลเดอร์ที่สามารถเขียนได้ 📦
 	•	เฟสที่ 2 — bookassetd: ใช้ระบบดาวน์โหลด EPUB เพื่อเขียน payload ไปยังตำแหน่งไฟล์ที่ต้องการได้ตามใจ 💾➡️📂
 	•	พื้นที่ที่สามารถเขียนไฟล์ได้ เช่น
+	
 	•	/private/var/containers/Shared/SystemGroup/.../Library/Caches/
+	
 	•	/private/var/mobile/Library/FairPlay/
+	
 	•	/private/var/mobile/Media/
+	
 	•	มีการสาธิตแก้ไขไฟล์ com.apple.MobileGestalt.plist เพื่อเช็กว่าช่องโหว่ทำงานสำเร็จจริง ✔️🔍
 
 ⸻

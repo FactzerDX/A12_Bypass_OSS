@@ -24,7 +24,8 @@ iOS Activation Tool Suite
 เป็นศูนย์กลางในการรับคำร้องจากอุปกรณ์และส่งฐานข้อมูล/ไฟล์ที่จำเป็นกลับไป 📡📦
 
 📁 โครงสร้างไฟล์ใน Repository
-`.
+```
+.
 ├── client             # แอปไคลเอนต์ฝั่ง Python
 │   ├── activator.py   # จุดเริ่มต้นของระบบอัตโนมัติ
 │   └── README.md      # คู่มือสำหรับ client
@@ -32,7 +33,8 @@ iOS Activation Tool Suite
     ├── assets         # เก็บไฟล์ config ของอุปกรณ์
     ├── public         # โฟลเดอร์เว็บหลัก
     ├── SETUP.md       # วิธีตั้งค่าเซิร์ฟเวอร์
-    └── templates      # แม่แบบ SQL สำหรับสร้าง payload`
+    └── templates      # แม่แบบ SQL สำหรับสร้าง payload
+```
 
 🧰 สิ่งที่ต้องมี (Prerequisites)
 

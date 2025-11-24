@@ -1,43 +1,42 @@
-# Server Backend Setup
+Server Backend Setup 🚀
 
-## Directory Structure
+📂 โครงสร้างไดเรกทอรี
 
-```
 /var/www/html/
 ├── public/
-│   ├── index.php       (Main Logic)
-│   └── cache/          (Publicly accessible storage)
+│   ├── index.php       (โค้ดประมวลผลหลัก)
+│   └── cache/          (พื้นที่เก็บไฟล์ที่เข้าถึงได้จากเว็บ)
 ├── templates/
 │   ├── bl_structure.sql
 │   └── downloads_structure.sql
 ├── assets/
-│   └── Maker/          (Device Configuration Files)
+│   └── Maker/          (ไฟล์ตั้งค่าของอุปกรณ์)
 ├── logs/
 └── cron/
     └── cleanup.php
-```
 
-## Installation Steps
+🛠️ ขั้นตอนการติดตั้ง
+	1.	อัปโหลดไฟล์ทั้งหมด
+นำโฟลเดอร์ server ทั้งชุดขึ้นไปบนเว็บโฮสต์ของคุณ
+	2.	ตั้งค่า Web Root
+ปรับ Document Root ของ Nginx/Apache ให้ชี้ไปที่โฟลเดอร์ public 🌐
+	3.	กำหนดสิทธิ์ให้เขียนได้
+ให้เว็บเซิร์ฟเวอร์สามารถเขียนไฟล์ใน public/cache และ logs
 
-1.  **Upload**: Upload the entire contents of the `server` directory to your web host.
-2.  **Web Root**: Point your web server (Nginx/Apache) document root to the `public` folder.
-3.  **Permissions**: Ensure the `public/cache` and `logs` directories are writable by the web server:
-    ```bash
-    chmod -R 777 public/cache logs
-    ```
+chmod -R 777 public/cache logs
 
-## Validation (Auto-Generated)
+🔍 การตรวจสอบ (สร้างให้อัตโนมัติแล้ว)
 
-Because you used the automated `package_builder.sh`, the following complex tasks have been completed for you:
+หากคุณใช้สคริปต์ package_builder.sh, ระบบได้ทำสิ่งเหล่านี้ให้เรียบร้อยแล้ว:
+	•	ไฟล์เทมเพลตฐานข้อมูล
+downloads_structure.sql ถูกสร้างใหม่และย้ายไปไว้ใน templates/ ✔️
+	•	ย้ายไฟล์ Asset อัตโนมัติ
+โฟลเดอร์ Maker ถูกนำออกจากแบ็กอัปและวางไว้ใน assets/Maker/ โดยสมบูรณ์ 📦✨
 
-* **Database Templates**: `downloads_structure.sql` has been successfully reconstructed and placed in `templates/`.
-* **Asset Migration**: The `Maker` folder has been automatically extracted from your backup and placed in `assets/Maker/`.
+👉 ไม่ต้องคัดลอกหรือแก้ชื่อไฟล์เองเพิ่มเติม
 
-**You do not need to manually copy or rename any files.**
+♻️ การดูแลระบบ (Maintenance)
 
-## Maintenance
+ตั้งค่า Cron ให้ทำงานทุก 1 นาทีเพื่อจัดการลบ payload เก่าที่ไม่ใช้งานแล้ว:
 
-Set up a cron job to run every minute to clean up old payload files:
-```bash
 * * * * * php /path/to/server/cron/cleanup.php
-```

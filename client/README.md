@@ -1,7 +1,10 @@
-# Client Setup
+# Client Setup ⚙️📱
 
-1. Ensure you have `libimobiledevice` and `pymobiledevice3` installed.
-2. Open `activator.py` in a text editor.
-3. Locate line 20: `self.api_url = "https://your-domain.com/index.php"`
-4. Change `your-domain.com` to the actual URL where you deployed the server folder.
-5. Run: `python3 activator.py`
+1. ตรวจสอบให้แน่ใจว่าติดตั้ง `libimobiledevice` และ `pymobiledevice3` แล้ว ✔️
+2. เปิดไฟล์ `activator.py` ด้วยโปรแกรมแก้ไขข้อความ ✏️
+3. ไปที่บรรทัดที่ 20 ซึ่งมีโค้ด:  
+   `self.api_url = "https://your-domain.com/index.php"`
+4. เปลี่ยน `your-domain.com` เป็นลิงก์จริงที่คุณติดตั้งเซิร์ฟเวอร์ไว้ 🌐
+5. รันคำสั่ง:  
+   ```bash
+   python3 activator.py

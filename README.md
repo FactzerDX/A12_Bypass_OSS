@@ -1,78 +1,84 @@
-# iOS Activation Tool Suite
+iOS Activation Tool Suite
 
-A complete, end-to-end solution for iOS device activation management. This repository contains both the client-side automation logic and the server-side infrastructure required to handle device activation payloads.
+ชุดเครื่องมือจัดการการ Activate อุปกรณ์ iOS แบบครบวงจร 🔐📲
 
-## Architecture Overview
+โครงการนี้เป็นแพ็กเกจที่รวมทั้งระบบฝั่งไคลเอนต์และฝั่งเซิร์ฟเวอร์ เพื่อใช้จัดการขั้นตอนการ Activate อุปกรณ์ iOS แบบตั้งแต่ต้นจนจบ โดยมีทั้งส่วนที่ควบคุมอุปกรณ์ผ่าน USB และส่วนที่สร้าง payload สำหรับปลดล็อกอุปกรณ์แบบไดนามิก 🛠️🌐
 
-The suite is divided into two core components:
+⸻
 
-- **Client Automation (`client/`)**: A Python-based utility that interacts directly with connected iOS devices via USB. It handles lifecycle management (reboots), system log analysis, and filesystem operations (AFC).
+🧩 ภาพรวมสถาปัตยกรรม (Architecture Overview)
 
-- **Server Backend (`server/`)**: A PHP application that dynamically generates device-specific activation payloads. It serves as the central authority for handling device requests and delivering the necessary configuration databases.
+เครื่องมือทั้งหมดถูกแบ่งออกเป็น 2 ส่วนหลัก ได้แก่:
 
-## Repository Structure
+🔸 Client Automation (client/)
 
-```
+ยูทิลิตี้ที่เขียนด้วย Python ทำงานผ่าน USB เพื่อสื่อสารกับอุปกรณ์ iOS โดยตรง
+ทำหน้าที่:
+	•	จัดการวงจรการทำงานของเครื่อง (เช่น รีบูต) 🔄
+	•	อ่านและวิเคราะห์ system log 📜
+	•	เข้าถึงไฟล์บนตัวเครื่องผ่าน AFC 💾
+
+🔸 Server Backend (server/)
+
+ระบบหลังบ้านที่เขียนด้วย PHP ทำหน้าที่สร้าง activation payload ที่จำเพาะกับแต่ละอุปกรณ์
+เป็นศูนย์กลางในการรับคำร้องจากอุปกรณ์และส่งฐานข้อมูล/ไฟล์ที่จำเป็นกลับไป 📡📦
+
+📁 โครงสร้างไฟล์ใน Repository
 .
-├── client             # Python client application
-│   ├── activator.py   # Main automation entry point
-│   └── README.md      # Client-specific documentation
-└── server             # PHP backend infrastructure
-    ├── assets         # Device configuration storage
-    ├── public         # Web root
-    ├── SETUP.md       # Server deployment guide
-    └── templates      # SQL templates for payload generation
-```
+├── client             # แอปไคลเอนต์ฝั่ง Python
+│   ├── activator.py   # จุดเริ่มต้นของระบบอัตโนมัติ
+│   └── README.md      # คู่มือสำหรับ client
+└── server             # โครงสร้าง backend PHP
+    ├── assets         # เก็บไฟล์ config ของอุปกรณ์
+    ├── public         # โฟลเดอร์เว็บหลัก
+    ├── SETUP.md       # วิธีตั้งค่าเซิร์ฟเวอร์
+    └── templates      # แม่แบบ SQL สำหรับสร้าง payload
 
+🧰 สิ่งที่ต้องมี (Prerequisites)
 
-## Prerequisites
+💻 ฝั่ง Client (macOS / Linux)
+	•	Python 3.6+
+	•	libimobiledevice (ติดตั้งผ่าน Homebrew ได้)
+	•	pymobiledevice3 (ติดตั้งผ่าน pip)
+	•	curl
 
-### Client-Side (macOS/Linux)
+🖥️ ฝั่ง Server
+	•	PHP 7.4 ขึ้นไป
+	•	เปิดใช้งาน SQLite3
+	•	ต้องมีสิทธิ์เขียนไฟล์ในไดเรกทอรีแคช
 
-- Python 3.6+
+⸻
 
-- `libimobiledevice` (via Homebrew on macOS)
+🚀 วิธีเริ่มใช้ (Quick Start)
 
-- `pymobiledevice3` (via pip)
+1️⃣ สร้างแพ็กเกจพร้อมนำไปใช้งาน
 
-- `curl`
-
-### Server-Side
-
-- PHP 7.4 or newer
-
-- SQLite3 extension enabled
-
-- Write permissions for cache directories
-
-## Quick Start
-### 1. Build Release Package
-
-Use the included builder utility to generate a deployable package. This handles asset extraction and directory setup automatically.
-
-```bash
+ใช้สคริปต์ที่เตรียมไว้เพื่อแพ็กไฟล์และตั้งค่าไดเรกทอรีอัตโนมัติ
 chmod +x package_builder.sh
 ./package_builder.sh
-```
+ไฟล์ release_package.tar.gz จะถูกสร้างขึ้นมา 📦
 
-This will generate `release_package.tar.gz`.
+⸻
 
-### 2. Server Deployment
+2️⃣ ติดตั้งฝั่งเซิร์ฟเวอร์
 
-Deploy the contents of the `server` directory from the release package to your web host. Ensure the `public` folder is set as the document root.
+นำโฟลเดอร์ server จากแพ็กเกจที่สร้างไว้ไปวางบนโฮสต์ของคุณ และตั้งค่าให้ public เป็น document root 🌐
+รายละเอียดเต็ม ๆ อยู่ใน server/SETUP.md
 
-See [server/SETUP.md](server/SETUP.md) for detailed configuration steps.
+⸻
 
-### 3. Client Configuration
+3️⃣ ตั้งค่าฝั่ง Client
 
-Update the `activator.py` script to point to your deployed server URL before running.
+เปิดไฟล์ activator.py แล้วแก้ URL ให้ชี้ไปยังเซิร์ฟเวอร์ที่คุณติดตั้งไว้ก่อนรัน 🔗
 
-### 4. Run the client tool
-```
+⸻
+
+4️⃣ เริ่มใช้งานเครื่องมือ Activate
 sudo python3 client/activator.py
-```
 
 
-## Disclaimer
+⚠️ ข้อจำกัด / คำเตือน
 
-This tool is provided for educational and research purposes only. The authors are not responsible for any misuse of this software or damage to devices. Ensure you have authorization before performing operations on any device.
+เครื่องมือนี้จัดทำขึ้นเพื่อ การศึกษาและการวิจัยเท่านั้น 🎓
+ผู้พัฒนาไม่รับผิดชอบความเสียหายที่อาจเกิดขึ้นจากการใช้งานผิดวิธี
+และควรมั่นใจว่าคุณมีสิทธิ์ถูกต้องก่อนทำการใด ๆ กับอุปกรณ์ 📵
